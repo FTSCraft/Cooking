@@ -12,6 +12,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -22,6 +24,23 @@ public class CraftingListener implements Listener {
     public CraftingListener(Cooking plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    }
+
+    @EventHandler
+    public void onCraftingPrepare(PrepareItemCraftEvent event) {
+        if (event.getRecipe() == null)
+            return;
+        if (event.getInventory().getType() != InventoryType.WORKBENCH)
+            return;
+        ItemStack result = event.getRecipe().getResult();
+        String sign = ItemReader.getSign(result);
+        if (sign == null)
+            return;
+        if (sign.startsWith("COOKING")) {
+            if (!event.getViewers().get(0).hasPermission("cooking.skill")) {
+                event.getInventory().setResult(null);
+            }
+        }
     }
 
     @EventHandler
