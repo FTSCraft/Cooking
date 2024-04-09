@@ -1,0 +1,6 @@
+name: Cooking
+version: '${project.version}'
+main: de.ftscraft.cooking.main.Cooking
+api-version: '1.20'
+libraries:
+  - com.jeff-media:custom-block-data:2.2.2
