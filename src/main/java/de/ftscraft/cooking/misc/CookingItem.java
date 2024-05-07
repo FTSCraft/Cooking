@@ -10,6 +10,15 @@ public enum CookingItem {
     SALT(CookingDeviceType.NONE, -1),
 
 
+    COOKED_COD(CookingDeviceType.OVEN, 5),
+    COOKED_SALMON(CookingDeviceType.OVEN, 5),
+    COOKED_PORKCHOP(CookingDeviceType.OVEN, 5),
+    COOKED_BEEF(CookingDeviceType.OVEN, 5),
+    COOKED_CHICKEN(CookingDeviceType.OVEN, 5),
+    COOKED_MUTTON(CookingDeviceType.OVEN, 5),
+    BAKED_POTATO(CookingDeviceType.OVEN, 5),
+    MUSHROOM_STEW(CookingDeviceType.COOKING_POT, 5),
+
     FLOUR(CookingDeviceType.NONE, -1),
     BREAD(CookingDeviceType.OVEN, 5),
     COOKIE_DOUG(CookingDeviceType.NONE, -1),

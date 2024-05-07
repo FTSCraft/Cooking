@@ -9,11 +9,12 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ShapedRecipe;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CookingItemManager {
 
-    private static final ArrayList<CustomCookingRecipe> customCookingRecipes = new ArrayList<>();
+    private static final Set<CustomCookingRecipe> customCookingRecipes = new HashSet<>();
 
     public CookingItemManager() {
         initItems();
@@ -21,6 +22,20 @@ public class CookingItemManager {
     }
 
     private void initItems() {
+
+        initVanillaReplaceItem(CookingItem.BREAD);
+        initVanillaReplaceItem(CookingItem.COOKIE);
+        initVanillaReplaceItem(CookingItem.COOKED_COD);
+        initVanillaReplaceItem(CookingItem.COOKED_SALMON);
+        initVanillaReplaceItem(CookingItem.COOKED_PORKCHOP);
+        initVanillaReplaceItem(CookingItem.COOKED_BEEF);
+        initVanillaReplaceItem(CookingItem.COOKED_CHICKEN);
+        initVanillaReplaceItem(CookingItem.COOKED_MUTTON);
+        initVanillaReplaceItem(CookingItem.BAKED_POTATO);
+        initVanillaReplaceItem(CookingItem.MUSHROOM_STEW);
+        initVanillaReplaceItem(CookingItem.PUMPKIN_PIE);
+        initVanillaReplaceItem(CookingItem.BEETROOT_SOUP);
+        initVanillaReplaceItem(CookingItem.RABBIT_STEW);
 
         CookingItem.COOKING_POT.setItem(
                 new ItemBuilder(Material.CAULDRON)
@@ -49,12 +64,6 @@ public class CookingItemManager {
                         .build()
         );
 
-        CookingItem.BREAD.setItem(
-                new ItemBuilder(Material.BREAD)
-                        .sign("COOKING_" + CookingItem.BREAD)
-                        .build()
-        );
-
         CookingItem.HONEY_MELON_JUICE.setItem(
                 new ItemBuilder(Material.HONEY_BOTTLE)
                         .name("§6Honigmelonensaft")
@@ -69,22 +78,10 @@ public class CookingItemManager {
                         .build()
         );
 
-        CookingItem.COOKIE.setItem(
-                new ItemBuilder(Material.COOKIE)
-                        .sign("COOKING_COOKIE")
-                        .build()
-        );
-
         CookingItem.PUMPKIN_PIE_DOUG.setItem(
                 new ItemBuilder(Material.CLAY_BALL)
                         .name("§7Kürbiskuchenteig")
                         .sign("COOKING_" + CookingItem.PUMPKIN_PIE_DOUG)
-                        .build()
-        );
-
-        CookingItem.PUMPKIN_PIE.setItem(
-                new ItemBuilder(Material.PUMPKIN_PIE)
-                        .sign("COOKING_" + CookingItem.PUMPKIN_PIE)
                         .build()
         );
 
@@ -102,12 +99,6 @@ public class CookingItemManager {
                         .build()
         );
 
-        CookingItem.RABBIT_STEW.setItem(
-                new ItemBuilder(Material.RABBIT_STEW)
-                        .sign("COOKING_" + CookingItem.RABBIT_STEW)
-                        .build()
-        );
-
         CookingItem.SWEET_JAM.setItem(
                 new ItemBuilder(Material.HONEY_BOTTLE)
                         .name("§6Süße Marmelade")
@@ -119,12 +110,6 @@ public class CookingItemManager {
                 new ItemBuilder(Material.MUSHROOM_STEW)
                         .name("§6Fischsuppe")
                         .sign("COOKING_" + CookingItem.FISH_SOUP)
-                        .build()
-        );
-
-        CookingItem.BEETROOT_SOUP.setItem(
-                new ItemBuilder(Material.BEETROOT_SOUP)
-                        .sign("COOKING_" + CookingItem.BEETROOT_SOUP)
                         .build()
         );
 
@@ -144,14 +129,19 @@ public class CookingItemManager {
 
     }
 
-    private void initCrafting() {
+    private void initVanillaReplaceItem(CookingItem item) {
+        Material material;
+        try {
+            material = Material.valueOf(item.name());
+        } catch (IllegalArgumentException e) {
+            Cooking.getInstance().disable("Wasn't able to fine material when initializing item " + item + ".");
+            throw new RuntimeException(e);
+        }
+        item.setItem(new ItemBuilder(material).sign("COOKING_" + item).build());
+        Bukkit.removeRecipe(material.getKey());
+    }
 
-        // Delete all recipes which need to be overwritten
-        Bukkit.removeRecipe(Material.BREAD.getKey());
-        Bukkit.removeRecipe(Material.COOKIE.getKey());
-        Bukkit.removeRecipe(Material.PUMPKIN_PIE.getKey());
-        Bukkit.removeRecipe(Material.RABBIT_STEW.getKey());
-        Bukkit.removeRecipe(Material.BEETROOT_SOUP.getKey());
+    private void initCrafting() {
 
         {
             ShapedRecipe cookingPotRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(), "COOKING_POT"), CookingItem.COOKING_POT.getItem());
@@ -171,20 +161,14 @@ public class CookingItemManager {
             Bukkit.addRecipe(ovenRecipe);
         }
 
+        /* ----------------------------------------------- */
+
         {
             ShapedRecipe flourRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(), "COOKING_FLOUR"), CookingItem.FLOUR.getItem());
             flourRecipe.shape("SWS", "WWW", "SWS");
             flourRecipe.setIngredient('S', Material.WHEAT_SEEDS);
             flourRecipe.setIngredient('W', Material.WHEAT);
             Bukkit.addRecipe(flourRecipe);
-        }
-
-        {
-            CustomCookingRecipe breadRecipe = new CustomCookingRecipe(CookingItem.BREAD);
-            breadRecipe.shape("AAA", "FFF", "AAA");
-            breadRecipe.setIngredient('A', Material.AIR);
-            breadRecipe.setIngredient('F', CookingItem.FLOUR.getItem());
-            customCookingRecipes.add(breadRecipe);
         }
 
         {
@@ -196,6 +180,26 @@ public class CookingItemManager {
             cookieDougRecipe.setIngredient('S', Material.SUGAR);
             cookieDougRecipe.setIngredient('P', CookingItem.CLEAN_WATER.getItem());
             Bukkit.addRecipe(cookieDougRecipe);
+        }
+
+        {
+            ShapedRecipe pumpkinPieRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(), "COOKING_PUMPKIN_PIE_DOUG"), CookingItem.PUMPKIN_PIE_DOUG.getItem());
+            pumpkinPieRecipe.shape("PBP", "EWE", "SWS");
+            pumpkinPieRecipe.setIngredient('P', Material.PUMPKIN);
+            pumpkinPieRecipe.setIngredient('B', Material.BONE_MEAL);
+            pumpkinPieRecipe.setIngredient('E', Material.EGG);
+            pumpkinPieRecipe.setIngredient('S', Material.SUGAR);
+            pumpkinPieRecipe.setIngredient('W', Material.POTION);
+        }
+
+        /* ----------------------------------------------- */
+
+        {
+            CustomCookingRecipe breadRecipe = new CustomCookingRecipe(CookingItem.BREAD);
+            breadRecipe.shape("AAA", "FFF", "AAA");
+            breadRecipe.setIngredient('A', Material.AIR);
+            breadRecipe.setIngredient('F', CookingItem.FLOUR.getItem());
+            customCookingRecipes.add(breadRecipe);
         }
 
         {
@@ -216,9 +220,100 @@ public class CookingItemManager {
             customCookingRecipes.add(honeyMelonJuiceRecipe);
         }
 
+        {
+            CustomCookingRecipe sweetFishRecipe = new CustomCookingRecipe(CookingItem.SWEET_FISH);
+            sweetFishRecipe.shape("AAA", "SSS", "XSY");
+            sweetFishRecipe.setIngredient('Y', Material.SALMON);
+            sweetFishRecipe.setIngredient('X', Material.COD);
+            sweetFishRecipe.setIngredient('S', Material.SUGAR);
+            sweetFishRecipe.setIngredient('A', Material.AIR);
+            customCookingRecipes.add(sweetFishRecipe);
+        }
+
+        {
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.PUMPKIN_PIE);
+            recipe.shape("AAA", "ADA", "AAA");
+            recipe.setIngredient('D', CookingItem.PUMPKIN_PIE_DOUG.getItem());
+            recipe.setIngredient('A', Material.AIR);
+            customCookingRecipes.add(recipe);
+        }
+
+        {
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.CLEAN_WATER);
+            recipe.shape("ARA", "AWA", "AAA");
+            recipe.setIngredient('A', Material.AIR);
+            recipe.setIngredient('W', Material.POTION);
+            recipe.setIngredient('R', Material.REDSTONE);
+            customCookingRecipes.add(recipe);
+        }
+
+        {
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.RABBIT_STEW);
+            recipe.shape("SRS", "CPC", "XWY");
+            recipe.setIngredient('S', CookingItem.SALT.getItem());
+            recipe.setIngredient('R', Material.RABBIT);
+            recipe.setIngredient('C', Material.CARROT);
+            recipe.setIngredient('P', Material.POTATO);
+            recipe.setIngredient('X', Material.BROWN_MUSHROOM);
+            recipe.setIngredient('Y', Material.RED_MUSHROOM);
+            recipe.setIngredient('W', Material.POTION);
+            customCookingRecipes.add(recipe);
+        }
+
+        {
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.SWEET_JAM);
+            recipe.shape("BGB", "BSB", "SWS");
+            recipe.setIngredient('B', Material.SWEET_BERRIES);
+            recipe.setIngredient('G', Material.GLOW_BERRIES);
+            recipe.setIngredient('S', Material.SUGAR);
+            recipe.setIngredient('W', Material.POTION);
+            customCookingRecipes.add(recipe);
+        }
+
+        {
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.FISH_SOUP);
+            recipe.shape("CKS", "CKS", "TWT");
+            recipe.setIngredient('C', Material.COD);
+            recipe.setIngredient('K', Material.KELP);
+            recipe.setIngredient('S', Material.SALMON);
+            recipe.setIngredient('T', CookingItem.SALT.getItem());
+            recipe.setIngredient('W', Material.POTION);
+            customCookingRecipes.add(recipe);
+        }
+
+        {
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.BEETROOT_SOUP);
+            recipe.shape("BBB", "BBB", "SWS");
+            recipe.setIngredient('B', Material.BEETROOT);
+            recipe.setIngredient('S', CookingItem.SALT.getItem());
+            recipe.setIngredient('W', Material.POTION);
+            customCookingRecipes.add(recipe);
+        }
+
+        {
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.MISO_SOUP);
+            recipe.shape("AKA", "SWS", "WPW");
+            recipe.setIngredient('A', Material.AIR);
+            recipe.setIngredient('S', CookingItem.SALT.getItem());
+            recipe.setIngredient('W', Material.SEAGRASS);
+            recipe.setIngredient('P', Material.POTION);
+            customCookingRecipes.add(recipe);
+        }
+
+        {
+            CustomCookingRecipe sushi = new CustomCookingRecipe(CookingItem.SUSHI);
+            sushi.shape("ASK", "XKY", "KAA");
+            sushi.setIngredient('S', CookingItem.SALT.getItem());
+            sushi.setIngredient('K', Material.KELP);
+            sushi.setIngredient('Y', Material.SALMON);
+            sushi.setIngredient('X', Material.COD);
+            sushi.setIngredient('A', Material.AIR);
+            customCookingRecipes.add(sushi);
+        }
+
     }
 
-    public static ArrayList<CustomCookingRecipe> getCustomCookingRecipes() {
+    public static Set<CustomCookingRecipe> getCustomCookingRecipes() {
         return customCookingRecipes;
     }
 }

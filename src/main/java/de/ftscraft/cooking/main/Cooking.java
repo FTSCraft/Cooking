@@ -60,6 +60,11 @@ public final class Cooking extends JavaPlugin {
         }
     }
 
+    public void disable(String reason) {
+        getLogger().severe("Disabling plugin because of " + reason);
+        getServer().getPluginManager().disablePlugin(this);
+    }
+
     public static Cooking getInstance() {
         return instance;
     }

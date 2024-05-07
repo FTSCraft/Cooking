@@ -51,8 +51,10 @@ public class CraftingListener implements Listener {
             return;
         }
         if (!(event.getClickedInventory().getHolder() instanceof CookingDevice cookingDevice)) {
-            if (event.getClick() == ClickType.DOUBLE_CLICK)
-                event.setCancelled(true);
+            if (event.getInventory().getHolder() != null && event.getInventory().getHolder() instanceof CookingDevice) {
+                if (event.getClick() == ClickType.DOUBLE_CLICK)
+                    event.setCancelled(true);
+            }
             return;
         }
         {
