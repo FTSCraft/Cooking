@@ -90,7 +90,7 @@ public class CookingDevice implements InventoryHolder {
             ItemStack is = inventory.getItem(i);
             if (is == null)
                 is = new ItemStack(Material.AIR);
-            if (!is.isSimilar(recipe.getIngredientMap().get(c)))
+            if (!Misc.isItemSimilar(is, recipe.getIngredientMap().get(c)))
                 return false;
 
             if (i == 12 || i == 21)

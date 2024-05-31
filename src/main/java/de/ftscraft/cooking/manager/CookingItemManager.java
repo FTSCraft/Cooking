@@ -5,8 +5,11 @@ import de.ftscraft.cooking.misc.CookingItem;
 import de.ftscraft.cooking.misc.CustomCookingRecipe;
 import de.ftscraft.ftsutils.items.ItemBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.Keyed;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 
 import java.util.HashSet;
@@ -45,84 +48,84 @@ public class CookingItemManager {
 
         CookingItem.OVEN.setItem(
                 new ItemBuilder(Material.FURNACE)
-                        .name("§6Ofen")
+                        .name("§r§6Ofen")
                         .sign("COOKING_OVEN")
                         .build()
         );
 
         CookingItem.SALT.setItem(
                 new ItemBuilder(Material.SUGAR)
-                        .name("§fSalz")
+                        .name("§r§fSalz")
                         .sign("COOKING_SALT")
                         .build()
         );
 
         CookingItem.FLOUR.setItem(
                 new ItemBuilder(Material.BONE_MEAL)
-                        .name("§7Mehl")
+                        .name("§r§7Mehl")
                         .sign("COOKING_" + CookingItem.FLOUR)
                         .build()
         );
 
         CookingItem.HONEY_MELON_JUICE.setItem(
                 new ItemBuilder(Material.HONEY_BOTTLE)
-                        .name("§6Honigmelonensaft")
+                        .name("§r§6Honigmelonensaft")
                         .sign("COOKING_" + CookingItem.HONEY_MELON_JUICE)
                         .build()
         );
 
         CookingItem.COOKIE_DOUG.setItem(
                 new ItemBuilder(Material.CLAY_BALL)
-                        .name("§7Keksteig")
+                        .name("§r§7Keksteig")
                         .sign("COOKING_" + CookingItem.COOKIE_DOUG)
                         .build()
         );
 
         CookingItem.PUMPKIN_PIE_DOUG.setItem(
                 new ItemBuilder(Material.CLAY_BALL)
-                        .name("§7Kürbiskuchenteig")
+                        .name("§r§7Kürbiskuchenteig")
                         .sign("COOKING_" + CookingItem.PUMPKIN_PIE_DOUG)
                         .build()
         );
 
         CookingItem.SWEET_FISH.setItem(
                 new ItemBuilder(Material.TROPICAL_FISH)
-                        .name("§6Süßer Fisch")
+                        .name("§r§6Süßer Fisch")
                         .sign("COOKING_" + CookingItem.SWEET_FISH)
                         .build()
         );
 
         CookingItem.CLEAN_WATER.setItem(
                 new ItemBuilder(Material.POTION)
-                        .name("§1Klares Wasser")
+                        .name("§r§1Klares Wasser")
                         .sign("COOKING_" + CookingItem.CLEAN_WATER)
                         .build()
         );
 
         CookingItem.SWEET_JAM.setItem(
                 new ItemBuilder(Material.HONEY_BOTTLE)
-                        .name("§6Süße Marmelade")
+                        .name("§r§6Süße Marmelade")
                         .sign("COOKING_" + CookingItem.SWEET_JAM)
                         .build()
         );
 
         CookingItem.FISH_SOUP.setItem(
                 new ItemBuilder(Material.MUSHROOM_STEW)
-                        .name("§6Fischsuppe")
+                        .name("§r§6Fischsuppe")
                         .sign("COOKING_" + CookingItem.FISH_SOUP)
                         .build()
         );
 
         CookingItem.MISO_SOUP.setItem(
                 new ItemBuilder(Material.MUSHROOM_STEM)
-                        .name("§6Miso Suppe")
+                        .name("§r§6Miso Suppe")
                         .sign("COOKING_" + CookingItem.MISO_SOUP)
                         .build()
         );
 
         CookingItem.SUSHI.setItem(
                 new ItemBuilder(Material.DRIED_KELP)
-                        .name("§6Sushi")
+                        .name("§r§6Sushi")
                         .sign("COOKING_SUSHI")
                         .build()
         );
@@ -134,11 +137,14 @@ public class CookingItemManager {
         try {
             material = Material.valueOf(item.name());
         } catch (IllegalArgumentException e) {
-            Cooking.getInstance().disable("Wasn't able to fine material when initializing item " + item + ".");
+            Cooking.getInstance().disable("Wasn't able to find material when initializing item " + item + ".");
             throw new RuntimeException(e);
         }
         item.setItem(new ItemBuilder(material).sign("COOKING_" + item).build());
-        Bukkit.removeRecipe(material.getKey());
+        for (Recipe recipe : Bukkit.getRecipesFor(new ItemStack(material))) {
+            if (recipe instanceof Keyed keyed)
+                Bukkit.removeRecipe(keyed.getKey());
+        }
     }
 
     private void initCrafting() {
@@ -147,7 +153,7 @@ public class CookingItemManager {
             ShapedRecipe cookingPotRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(), "COOKING_POT"), CookingItem.COOKING_POT.getItem());
             cookingPotRecipe.shape("CAC", "CIC", "AAA");
             cookingPotRecipe.setIngredient('A', Material.AIR);
-            cookingPotRecipe.setIngredient('C', Material.COPPER_INGOT);
+            cookingPotRecipe.setIngredient('C', Material.COPPER_BLOCK);
             cookingPotRecipe.setIngredient('I', Material.IRON_BLOCK);
             Bukkit.addRecipe(cookingPotRecipe);
         }
