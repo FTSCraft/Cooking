@@ -153,7 +153,7 @@ public class CookingItemManager {
             ShapedRecipe cookingPotRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(), "COOKING_POT"), CookingItem.COOKING_POT.getItem());
             cookingPotRecipe.shape("CAC", "CIC", "AAA");
             cookingPotRecipe.setIngredient('A', Material.AIR);
-            cookingPotRecipe.setIngredient('C', Material.COPPER_BLOCK);
+            cookingPotRecipe.setIngredient('C', Material.COPPER_INGOT);
             cookingPotRecipe.setIngredient('I', Material.IRON_BLOCK);
             Bukkit.addRecipe(cookingPotRecipe);
         }
@@ -163,7 +163,7 @@ public class CookingItemManager {
             ovenRecipe.shape("IAI", "ICI", "AAA");
             ovenRecipe.setIngredient('A', Material.AIR);
             ovenRecipe.setIngredient('I', Material.IRON_INGOT);
-            ovenRecipe.setIngredient('C', Material.COPPER_INGOT);
+            ovenRecipe.setIngredient('C', Material.COPPER_BLOCK);
             Bukkit.addRecipe(ovenRecipe);
         }
 
