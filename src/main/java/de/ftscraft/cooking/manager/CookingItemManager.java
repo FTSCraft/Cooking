@@ -317,6 +317,74 @@ public class CookingItemManager {
             customCookingRecipes.add(sushi);
         }
 
+        /* ----------------------------------------------- */
+
+        {
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.COOKED_COD);
+            recipe.shape("AAA", "AXA", "AAA");
+            recipe.setIngredient('A', Material.AIR);
+            recipe.setIngredient('X', Material.COD);
+            customCookingRecipes.add(recipe);
+        }
+
+        {
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.COOKED_SALMON);
+            recipe.shape("AAA", "AXA", "AAA");
+            recipe.setIngredient('A', Material.AIR);
+            recipe.setIngredient('X', Material.SALMON);
+            customCookingRecipes.add(recipe);
+        }
+
+        {
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.COOKED_PORKCHOP);
+            recipe.shape("AAA", "AXA", "AAA");
+            recipe.setIngredient('A', Material.AIR);
+            recipe.setIngredient('X', Material.PORKCHOP);
+            customCookingRecipes.add(recipe);
+        }
+
+        {
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.COOKED_BEEF);
+            recipe.shape("AAA", "AXA", "AAA");
+            recipe.setIngredient('A', Material.AIR);
+            recipe.setIngredient('X', Material.BEEF);
+            customCookingRecipes.add(recipe);
+        }
+
+        {
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.COOKED_CHICKEN);
+            recipe.shape("AAA", "AXA", "AAA");
+            recipe.setIngredient('A', Material.AIR);
+            recipe.setIngredient('X', Material.CHICKEN);
+            customCookingRecipes.add(recipe);
+        }
+
+        {
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.COOKED_MUTTON);
+            recipe.shape("AAA", "AXA", "AAA");
+            recipe.setIngredient('A', Material.AIR);
+            recipe.setIngredient('X', Material.MUTTON);
+            customCookingRecipes.add(recipe);
+        }
+
+        {
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.BAKED_POTATO);
+            recipe.shape("AAA", "AXA", "AAA");
+            recipe.setIngredient('A', Material.AIR);
+            recipe.setIngredient('X', Material.POTATO);
+            customCookingRecipes.add(recipe);
+        }
+
+        {
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.MUSHROOM_STEW);
+            recipe.shape("AAA", "RBA", "ASA");
+            recipe.setIngredient('A', Material.AIR);
+            recipe.setIngredient('R', Material.RED_MUSHROOM);
+            recipe.setIngredient('B', Material.BROWN_MUSHROOM);
+            recipe.setIngredient('S', Material.BOWL);
+            customCookingRecipes.add(recipe);
+        }
+
     }
 
     public static Set<CustomCookingRecipe> getCustomCookingRecipes() {
