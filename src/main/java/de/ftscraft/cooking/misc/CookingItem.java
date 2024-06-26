@@ -16,6 +16,7 @@ public enum CookingItem {
     COOKED_BEEF(CookingDeviceType.OVEN, 5),
     COOKED_CHICKEN(CookingDeviceType.OVEN, 5),
     COOKED_MUTTON(CookingDeviceType.OVEN, 5),
+    COOKED_RABBIT(CookingDeviceType.OVEN, 5),
     BAKED_POTATO(CookingDeviceType.OVEN, 5),
     MUSHROOM_STEW(CookingDeviceType.COOKING_POT, 5),
 

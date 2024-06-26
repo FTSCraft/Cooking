@@ -34,6 +34,7 @@ public class CookingItemManager {
         initVanillaReplaceItem(CookingItem.COOKED_BEEF);
         initVanillaReplaceItem(CookingItem.COOKED_CHICKEN);
         initVanillaReplaceItem(CookingItem.COOKED_MUTTON);
+        initVanillaReplaceItem(CookingItem.COOKED_RABBIT);
         initVanillaReplaceItem(CookingItem.BAKED_POTATO);
         initVanillaReplaceItem(CookingItem.MUSHROOM_STEW);
         initVanillaReplaceItem(CookingItem.PUMPKIN_PIE);
@@ -372,6 +373,14 @@ public class CookingItemManager {
             recipe.shape("AAA", "AXA", "AAA");
             recipe.setIngredient('A', Material.AIR);
             recipe.setIngredient('X', Material.POTATO);
+            customCookingRecipes.add(recipe);
+        }
+
+        {
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.COOKED_RABBIT);
+            recipe.shape("AAA", "AXA", "AAA");
+            recipe.setIngredient('A', Material.AIR);
+            recipe.setIngredient('X', Material.RABBIT);
             customCookingRecipes.add(recipe);
         }
 
