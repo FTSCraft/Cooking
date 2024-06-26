@@ -23,6 +23,8 @@ public class CookingDevice implements InventoryHolder {
     private boolean disabled = false;
     private CookingStatus status;
 
+    public static final int COAL_SLOT = 32;
+
     public CookingDevice(CookingDeviceType type, Location location) {
         this.location = location;
         String name;
@@ -60,6 +62,7 @@ public class CookingDevice implements InventoryHolder {
             if (i == 12 || i == 21)
                 i += 6;
         }
+        inventory.getItem(COAL_SLOT).setAmount(inventory.getItem(COAL_SLOT).getAmount() - 1);
     }
 
     public CookingItem checkForRecipe() {
@@ -118,6 +121,9 @@ public class CookingDevice implements InventoryHolder {
             if (i == 12 || i == 21)
                 i += 6;
         }
+        ItemStack is = inventory.getItem(COAL_SLOT);
+        if (is != null)
+            location.getWorld().dropItem(location, is);
     }
 
     private void fillInventory() {
@@ -130,6 +136,7 @@ public class CookingDevice implements InventoryHolder {
             if (i == 12 || i == 21)
                 i += 6;
         }
+        inventory.setItem(COAL_SLOT, null);
         inventory.setItem(25, Misc.GRAY_FILL);
     }
 

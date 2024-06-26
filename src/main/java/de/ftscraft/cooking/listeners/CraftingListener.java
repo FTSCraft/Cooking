@@ -111,6 +111,12 @@ public class CraftingListener implements Listener {
                 try {
                     item = CookingItem.valueOf(sign);
                 } catch (IllegalArgumentException e) {
+                    event.setCancelled(true);
+                    return;
+                }
+                ItemStack coalStack = cookingDevice.getInventory().getItem(CookingDevice.COAL_SLOT);
+                if (coalStack == null || coalStack.getType() != Material.COAL) {
+                    event.setCancelled(true);
                     return;
                 }
                 cookingDevice.startCooking(item);
