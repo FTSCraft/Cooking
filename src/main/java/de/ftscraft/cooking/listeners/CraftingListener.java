@@ -42,7 +42,16 @@ public class CraftingListener implements Listener {
 
     @EventHandler
     public void onInventoryDrag(InventoryDragEvent event) {
-
+        // Check if inventory is the inv of a cooking device
+        if (event.getInventory().getHolder() == null) {
+            return;
+        }
+        if (!(event.getInventory().getHolder() instanceof CookingDevice cookingDevice)) {
+            return;
+        }
+        if (cookingDevice.getStatus() == CookingDevice.CookingStatus.NONE) {
+            Bukkit.getScheduler().runTaskLater(plugin, () -> checkForRecipe(cookingDevice), 1);
+        } else event.setCancelled(true);
     }
 
     @EventHandler
@@ -84,7 +93,7 @@ public class CraftingListener implements Listener {
         }
 
         if (event.getSlot() == 25) {
-            // When clicking on the result while it is not cooking nor done, start cooking
+            // When clicking on the result while it's not cooking nor done, start cooking
             if (cookingDevice.getStatus() == CookingDevice.CookingStatus.NONE) {
                 ItemStack result = event.getInventory().getItem(25);
                 if (result == null) {
@@ -106,7 +115,7 @@ public class CraftingListener implements Listener {
                 }
                 cookingDevice.startCooking(item);
                 event.setCancelled(true);
-                // if clicking on result while it's done cooking, don't do anything
+                // if clicking on result while it's done cooking, do nothing
             } else if (cookingDevice.getStatus() == CookingDevice.CookingStatus.DONE) {
                 event.setCancelled(false);
                 Bukkit.getScheduler().runTaskLater(Cooking.getInstance(), () -> {
