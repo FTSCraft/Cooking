@@ -115,7 +115,7 @@ public class CraftingListener implements Listener {
                     return;
                 }
                 ItemStack coalStack = cookingDevice.getInventory().getItem(CookingDevice.COAL_SLOT);
-                if (coalStack == null || coalStack.getType() != Material.COAL) {
+                if (coalStack == null || coalStack.getType() != Material.COAL || coalStack.getAmount() < Misc.getCoalAmount(result.getAmount())) {
                     event.setCancelled(true);
                     return;
                 }
@@ -155,7 +155,9 @@ public class CraftingListener implements Listener {
             cookingDevice.getInventory().setItem(25, Misc.GRAY_FILL);
             return;
         }
-        cookingDevice.getInventory().setItem(25, item.getItem());
+        ItemStack itemStack = item.getItem().clone();
+        itemStack.setAmount(cookingDevice.getCookAmount());
+        cookingDevice.getInventory().setItem(25, itemStack);
     }
 
 }

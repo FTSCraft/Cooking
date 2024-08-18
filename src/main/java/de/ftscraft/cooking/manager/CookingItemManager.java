@@ -26,6 +26,7 @@ public class CookingItemManager {
 
     private void initItems() {
 
+        initVanillaReplaceItem(CookingItem.SUGAR);
         initVanillaReplaceItem(CookingItem.BREAD);
         initVanillaReplaceItem(CookingItem.COOKIE);
         initVanillaReplaceItem(CookingItem.COOKED_COD);
@@ -96,13 +97,6 @@ public class CookingItemManager {
                         .build()
         );
 
-        CookingItem.CLEAN_WATER.setItem(
-                new ItemBuilder(Material.POTION)
-                        .name("§r§1Klares Wasser")
-                        .sign("COOKING_" + CookingItem.CLEAN_WATER)
-                        .build()
-        );
-
         CookingItem.SWEET_JAM.setItem(
                 new ItemBuilder(Material.HONEY_BOTTLE)
                         .name("§r§6Süße Marmelade")
@@ -131,6 +125,12 @@ public class CookingItemManager {
                         .build()
         );
 
+        CookingItem.SUGAR.setItem(
+                new ItemBuilder(Material.SUGAR)
+                        .sign("COOKING_SUGAR")
+                        .build()
+        );
+
     }
 
     private void initVanillaReplaceItem(CookingItem item) {
@@ -153,7 +153,6 @@ public class CookingItemManager {
         {
             ShapedRecipe cookingPotRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(), "COOKING_POT"), CookingItem.COOKING_POT.getItem());
             cookingPotRecipe.shape("CAC", "CIC", "AAA");
-            cookingPotRecipe.setIngredient('A', Material.AIR);
             cookingPotRecipe.setIngredient('C', Material.COPPER_INGOT);
             cookingPotRecipe.setIngredient('I', Material.IRON_BLOCK);
             Bukkit.addRecipe(cookingPotRecipe);
@@ -162,10 +161,19 @@ public class CookingItemManager {
         {
             ShapedRecipe ovenRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(), "COOKING_OVEN"), CookingItem.OVEN.getItem());
             ovenRecipe.shape("IAI", "ICI", "AAA");
-            ovenRecipe.setIngredient('A', Material.AIR);
             ovenRecipe.setIngredient('I', Material.IRON_INGOT);
             ovenRecipe.setIngredient('C', Material.COPPER_BLOCK);
             Bukkit.addRecipe(ovenRecipe);
+        }
+
+        /* ----------------------------------------------- */
+
+        {
+            CustomCookingRecipe sugarRecipe = new CustomCookingRecipe(CookingItem.SUGAR);
+            sugarRecipe.shape("AAA", "ASA", "AAA");
+            sugarRecipe.setIngredient('A', Material.AIR);
+            sugarRecipe.setIngredient('S', Material.SUGAR_CANE);
+            customCookingRecipes.add(sugarRecipe);
         }
 
         /* ----------------------------------------------- */
@@ -182,10 +190,9 @@ public class CookingItemManager {
             ShapedRecipe cookieDougRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(), "COOKING_COOKIE_DOUG"), CookingItem.COOKIE_DOUG.getItem());
             cookieDougRecipe.shape("CCC", "AFA", "SPS");
             cookieDougRecipe.setIngredient('C', Material.COCOA_BEANS);
-            cookieDougRecipe.setIngredient('A', Material.AIR);
             cookieDougRecipe.setIngredient('F', CookingItem.FLOUR.getItem());
             cookieDougRecipe.setIngredient('S', Material.SUGAR);
-            cookieDougRecipe.setIngredient('P', CookingItem.CLEAN_WATER.getItem());
+            cookieDougRecipe.setIngredient('P', Material.POTION);
             Bukkit.addRecipe(cookieDougRecipe);
         }
 
@@ -246,15 +253,6 @@ public class CookingItemManager {
         }
 
         {
-            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.CLEAN_WATER);
-            recipe.shape("ARA", "AWA", "AAA");
-            recipe.setIngredient('A', Material.AIR);
-            recipe.setIngredient('W', Material.POTION);
-            recipe.setIngredient('R', Material.REDSTONE);
-            customCookingRecipes.add(recipe);
-        }
-
-        {
             CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.RABBIT_STEW);
             recipe.shape("SRS", "CPC", "XWY");
             recipe.setIngredient('S', CookingItem.SALT.getItem());
@@ -304,18 +302,18 @@ public class CookingItemManager {
             recipe.setIngredient('S', CookingItem.SALT.getItem());
             recipe.setIngredient('W', Material.SEAGRASS);
             recipe.setIngredient('P', Material.POTION);
+            recipe.setIngredient('K', Material.KELP);
             customCookingRecipes.add(recipe);
         }
 
         {
-            CustomCookingRecipe sushi = new CustomCookingRecipe(CookingItem.SUSHI);
+            ShapedRecipe sushi = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(), "COOKING_SUSHI"), CookingItem.SUSHI.getItem());
             sushi.shape("ASK", "XKY", "KAA");
             sushi.setIngredient('S', CookingItem.SALT.getItem());
-            sushi.setIngredient('K', Material.KELP);
+            sushi.setIngredient('K', Material.DRIED_KELP);
             sushi.setIngredient('Y', Material.SALMON);
             sushi.setIngredient('X', Material.COD);
-            sushi.setIngredient('A', Material.AIR);
-            customCookingRecipes.add(sushi);
+            Bukkit.addRecipe(sushi);
         }
 
         /* ----------------------------------------------- */
