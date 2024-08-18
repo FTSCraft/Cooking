@@ -9,6 +9,7 @@ public enum CookingItem {
     OVEN(CookingDeviceType.NONE, -1),
     SALT(CookingDeviceType.NONE, -1),
 
+    SUGAR(CookingDeviceType.COOKING_POT, 3),
 
     COOKED_COD(CookingDeviceType.OVEN, 5),
     COOKED_SALMON(CookingDeviceType.OVEN, 5),
@@ -18,7 +19,7 @@ public enum CookingItem {
     COOKED_MUTTON(CookingDeviceType.OVEN, 5),
     COOKED_RABBIT(CookingDeviceType.OVEN, 5),
     BAKED_POTATO(CookingDeviceType.OVEN, 5),
-    MUSHROOM_STEW(CookingDeviceType.COOKING_POT, 5),
+    MUSHROOM_STEW(CookingDeviceType.OVEN, 5),
 
     FLOUR(CookingDeviceType.NONE, -1),
     BREAD(CookingDeviceType.OVEN, 5),
@@ -27,7 +28,6 @@ public enum CookingItem {
     PUMPKIN_PIE_DOUG(CookingDeviceType.NONE, -1),
     PUMPKIN_PIE(CookingDeviceType.OVEN, 10),
     SWEET_FISH(CookingDeviceType.OVEN, 20),
-    CLEAN_WATER(CookingDeviceType.COOKING_POT, 5),
     RABBIT_STEW(CookingDeviceType.COOKING_POT, 30),
     SWEET_JAM(CookingDeviceType.COOKING_POT, 45),
     FISH_SOUP(CookingDeviceType.COOKING_POT, 30),

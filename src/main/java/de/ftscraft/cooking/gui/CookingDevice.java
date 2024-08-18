@@ -53,16 +53,31 @@ public class CookingDevice implements InventoryHolder {
     }
 
     private void removeItems() {
+        int amount = getCookAmount();
         for (int i = 10; i < 31; i++) {
             ItemStack is = inventory.getItem(i);
 
             if (is != null)
-                is.setAmount(is.getAmount() - 1);
+                is.setAmount(is.getAmount() - amount);
 
             if (i == 12 || i == 21)
                 i += 6;
         }
-        inventory.getItem(COAL_SLOT).setAmount(inventory.getItem(COAL_SLOT).getAmount() - 1);
+        int coalAmount = Misc.getCoalAmount(amount);
+        inventory.getItem(COAL_SLOT).setAmount(inventory.getItem(COAL_SLOT).getAmount() - coalAmount);
+    }
+
+    public int getCookAmount() {
+        int amount = Integer.MAX_VALUE;
+        for (int i = 10; i < 31; i++) {
+            ItemStack is = inventory.getItem(i);
+            if (is != null)
+                amount = Math.min(amount, is.getAmount());
+
+            if (i == 12 || i == 21)
+                i += 6;
+        }
+        return amount;
     }
 
     public CookingItem checkForRecipe() {
@@ -176,10 +191,12 @@ public class CookingDevice implements InventoryHolder {
         private final CookingItem result;
 
         private int currentCookingTime = 0;
+
         public CookingRunner(CookingItem result) {
             status = CookingStatus.COOKING;
             this.result = result;
         }
+
         @Override
         public void run() {
 
