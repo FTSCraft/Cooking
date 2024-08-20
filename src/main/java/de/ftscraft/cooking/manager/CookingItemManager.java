@@ -229,7 +229,7 @@ public class CookingItemManager {
             honeyMelonJuiceRecipe.shape("MMM", "HWH", "AAA");
             honeyMelonJuiceRecipe.setIngredient('M', Material.MELON_SLICE);
             honeyMelonJuiceRecipe.setIngredient('H', Material.HONEYCOMB);
-            honeyMelonJuiceRecipe.setIngredient('W', Material.HONEY_BOTTLE);
+            honeyMelonJuiceRecipe.setIngredient('W', Material.POTION);
             honeyMelonJuiceRecipe.setIngredient('A', Material.AIR);
             customCookingRecipes.add(honeyMelonJuiceRecipe);
         }
