@@ -199,11 +199,12 @@ public class CookingItemManager {
         {
             ShapedRecipe pumpkinPieRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(), "COOKING_PUMPKIN_PIE_DOUG"), CookingItem.PUMPKIN_PIE_DOUG.getItem());
             pumpkinPieRecipe.shape("PBP", "EWE", "SWS");
-            pumpkinPieRecipe.setIngredient('P', Material.PUMPKIN);
+            pumpkinPieRecipe.setIngredient('P', CookingItem.FLOUR.getItem());
             pumpkinPieRecipe.setIngredient('B', Material.BONE_MEAL);
             pumpkinPieRecipe.setIngredient('E', Material.EGG);
             pumpkinPieRecipe.setIngredient('S', Material.SUGAR);
             pumpkinPieRecipe.setIngredient('W', Material.POTION);
+            Bukkit.addRecipe(pumpkinPieRecipe);
         }
 
         /* ----------------------------------------------- */
