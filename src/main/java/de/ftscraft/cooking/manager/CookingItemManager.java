@@ -19,6 +19,8 @@ public class CookingItemManager {
 
     private static final Set<CustomCookingRecipe> customCookingRecipes = new HashSet<>();
 
+    private static final String SIGN_PREFIX = "COOKING_";
+
     public CookingItemManager() {
         initItems();
         initCrafting();
@@ -45,89 +47,96 @@ public class CookingItemManager {
         CookingItem.COOKING_POT.setItem(
                 new ItemBuilder(Material.CAULDRON)
                         .name("§6Kochtopf")
-                        .sign("COOKING_" + CookingItem.COOKING_POT).build()
+                        .sign(SIGN_PREFIX + CookingItem.COOKING_POT).build()
         );
 
         CookingItem.OVEN.setItem(
                 new ItemBuilder(Material.FURNACE)
                         .name("§r§6Ofen")
-                        .sign("COOKING_OVEN")
+                        .sign(SIGN_PREFIX + "OVEN")
                         .build()
         );
 
         CookingItem.SALT.setItem(
                 new ItemBuilder(Material.SUGAR)
                         .name("§r§fSalz")
-                        .sign("COOKING_SALT")
+                        .sign(SIGN_PREFIX + CookingItem.SALT)
                         .build()
         );
 
         CookingItem.FLOUR.setItem(
                 new ItemBuilder(Material.BONE_MEAL)
                         .name("§r§7Mehl")
-                        .sign("COOKING_" + CookingItem.FLOUR)
+                        .sign(SIGN_PREFIX + CookingItem.FLOUR)
                         .build()
         );
 
         CookingItem.HONEY_MELON_JUICE.setItem(
                 new ItemBuilder(Material.HONEY_BOTTLE)
                         .name("§r§6Honigmelonensaft")
-                        .sign("COOKING_" + CookingItem.HONEY_MELON_JUICE)
+                        .sign(SIGN_PREFIX + CookingItem.HONEY_MELON_JUICE)
                         .build()
         );
 
         CookingItem.COOKIE_DOUG.setItem(
                 new ItemBuilder(Material.CLAY_BALL)
                         .name("§r§7Keksteig")
-                        .sign("COOKING_" + CookingItem.COOKIE_DOUG)
+                        .sign(SIGN_PREFIX + CookingItem.COOKIE_DOUG)
                         .build()
         );
 
         CookingItem.PUMPKIN_PIE_DOUG.setItem(
                 new ItemBuilder(Material.CLAY_BALL)
                         .name("§r§7Kürbiskuchenteig")
-                        .sign("COOKING_" + CookingItem.PUMPKIN_PIE_DOUG)
+                        .sign(SIGN_PREFIX + CookingItem.PUMPKIN_PIE_DOUG)
                         .build()
         );
 
         CookingItem.SWEET_FISH.setItem(
                 new ItemBuilder(Material.TROPICAL_FISH)
                         .name("§r§6Süßer Fisch")
-                        .sign("COOKING_" + CookingItem.SWEET_FISH)
+                        .sign(SIGN_PREFIX + CookingItem.SWEET_FISH)
                         .build()
         );
 
         CookingItem.SWEET_JAM.setItem(
                 new ItemBuilder(Material.HONEY_BOTTLE)
                         .name("§r§6Süße Marmelade")
-                        .sign("COOKING_" + CookingItem.SWEET_JAM)
+                        .sign(SIGN_PREFIX + CookingItem.SWEET_JAM)
                         .build()
         );
 
         CookingItem.FISH_SOUP.setItem(
                 new ItemBuilder(Material.MUSHROOM_STEW)
                         .name("§r§6Fischsuppe")
-                        .sign("COOKING_" + CookingItem.FISH_SOUP)
+                        .sign(SIGN_PREFIX + CookingItem.FISH_SOUP)
                         .build()
         );
 
         CookingItem.MISO_SOUP.setItem(
                 new ItemBuilder(Material.MUSHROOM_STEM)
                         .name("§r§6Miso Suppe")
-                        .sign("COOKING_" + CookingItem.MISO_SOUP)
+                        .sign(SIGN_PREFIX + CookingItem.MISO_SOUP)
                         .build()
         );
 
         CookingItem.SUSHI.setItem(
                 new ItemBuilder(Material.DRIED_KELP)
                         .name("§r§6Sushi")
-                        .sign("COOKING_SUSHI")
+                        .sign(SIGN_PREFIX + CookingItem.SUSHI)
                         .build()
         );
 
         CookingItem.SUGAR.setItem(
                 new ItemBuilder(Material.SUGAR)
-                        .sign("COOKING_SUGAR")
+                        .sign(SIGN_PREFIX + CookingItem.SUGAR)
+                        .build()
+        );
+
+        CookingItem.CACTUS_JUICE.setItem(
+                new ItemBuilder(Material.HONEY_BOTTLE)
+                        .name("§r§6Kaktussaft")
+                        .sign("COOKING_" + CookingItem.CACTUS_JUICE)
                         .build()
         );
 
@@ -198,9 +207,9 @@ public class CookingItemManager {
 
         {
             ShapedRecipe pumpkinPieRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(), "COOKING_PUMPKIN_PIE_DOUG"), CookingItem.PUMPKIN_PIE_DOUG.getItem());
-            pumpkinPieRecipe.shape("PBP", "EWE", "SWS");
-            pumpkinPieRecipe.setIngredient('P', CookingItem.FLOUR.getItem());
-            pumpkinPieRecipe.setIngredient('B', Material.BONE_MEAL);
+            pumpkinPieRecipe.shape("PFP", "EWE", "SWS");
+            pumpkinPieRecipe.setIngredient('P', Material.PUMPKIN);
+            pumpkinPieRecipe.setIngredient('F', CookingItem.FLOUR.getItem());
             pumpkinPieRecipe.setIngredient('E', Material.EGG);
             pumpkinPieRecipe.setIngredient('S', Material.SUGAR);
             pumpkinPieRecipe.setIngredient('W', Material.POTION);
@@ -315,6 +324,17 @@ public class CookingItemManager {
             sushi.setIngredient('Y', Material.SALMON);
             sushi.setIngredient('X', Material.COD);
             Bukkit.addRecipe(sushi);
+        }
+
+        {
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.CACTUS_JUICE);
+            recipe.shape("DSD", "KDK", "AWA");
+            recipe.setIngredient('A', Material.AIR);
+            recipe.setIngredient('D', Material.GREEN_DYE);
+            recipe.setIngredient('S', Material.SUGAR_CANE);
+            recipe.setIngredient('K', Material.DRIED_KELP);
+            recipe.setIngredient('W', Material.POTION);
+            customCookingRecipes.add(recipe);
         }
 
         /* ----------------------------------------------- */
