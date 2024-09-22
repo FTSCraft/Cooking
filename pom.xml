@@ -6,7 +6,7 @@
 
     <groupId>de.ftscraft</groupId>
     <artifactId>Cooking</artifactId>
-    <version>1.6.3</version>
+    <version>1.6.5.1</version>
     <packaging>jar</packaging>
 
     <name>Cooking</name>
@@ -67,7 +67,7 @@
         <dependency>
             <groupId>com.github.halberfan</groupId>
             <artifactId>FTSUtils</artifactId>
-            <version>8f09a35c2f</version>
+            <version>1.4</version>
         </dependency>
         <dependency>
             <groupId>com.jeff-media</groupId>

@@ -9,8 +9,10 @@ public enum CookingItem {
     OVEN(CookingDeviceType.NONE, -1),
     SALT(CookingDeviceType.NONE, -1),
 
+    //Craftable
     SUGAR(CookingDeviceType.COOKING_POT, 3),
 
+    //Default food
     COOKED_COD(CookingDeviceType.OVEN, 5),
     COOKED_SALMON(CookingDeviceType.OVEN, 5),
     COOKED_PORKCHOP(CookingDeviceType.OVEN, 5),
@@ -21,6 +23,7 @@ public enum CookingItem {
     BAKED_POTATO(CookingDeviceType.OVEN, 5),
     MUSHROOM_STEW(CookingDeviceType.OVEN, 5),
 
+    //Plugin food/items
     FLOUR(CookingDeviceType.NONE, -1),
     BREAD(CookingDeviceType.OVEN, 5),
     COOKIE_DOUG(CookingDeviceType.NONE, -1),
@@ -34,6 +37,7 @@ public enum CookingItem {
     BEETROOT_SOUP(CookingDeviceType.COOKING_POT, 30),
     MISO_SOUP(CookingDeviceType.COOKING_POT, 30),
     SUSHI(CookingDeviceType.NONE, -1),
+    CACTUS_JUICE(CookingDeviceType.COOKING_POT, 5),
     HONEY_MELON_JUICE(CookingDeviceType.COOKING_POT, 5);
 
     private ItemStack item;
