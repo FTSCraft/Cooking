@@ -114,7 +114,7 @@ public class CookingItemManager {
         );
 
         CookingItem.MISO_SOUP.setItem(
-                new ItemBuilder(Material.MUSHROOM_STEM)
+                new ItemBuilder(Material.MUSHROOM_STEW)
                         .name("§r§6Miso Suppe")
                         .sign(SIGN_PREFIX + CookingItem.MISO_SOUP)
                         .build()
