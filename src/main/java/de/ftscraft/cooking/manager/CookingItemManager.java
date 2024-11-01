@@ -11,6 +11,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ShapelessRecipe;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -136,7 +137,15 @@ public class CookingItemManager {
         CookingItem.CACTUS_JUICE.setItem(
                 new ItemBuilder(Material.HONEY_BOTTLE)
                         .name("§r§6Kaktussaft")
-                        .sign("COOKING_" + CookingItem.CACTUS_JUICE)
+                        .sign(SIGN_PREFIX + CookingItem.CACTUS_JUICE)
+                        .build()
+        );
+
+        CookingItem.CLEAR_WATER.setItem(
+                new ItemBuilder(Material.HONEY_BOTTLE)
+                        .name("§bGereinigtes Wasser")
+                        .lore("§7Gereinigt")
+                        .sign("CLEAR_WATER")
                         .build()
         );
 
@@ -200,8 +209,8 @@ public class CookingItemManager {
             cookieDougRecipe.shape("CCC", "AFA", "SPS");
             cookieDougRecipe.setIngredient('C', Material.COCOA_BEANS);
             cookieDougRecipe.setIngredient('F', CookingItem.FLOUR.getItem());
-            cookieDougRecipe.setIngredient('S', Material.SUGAR);
-            cookieDougRecipe.setIngredient('P', Material.POTION);
+            cookieDougRecipe.setIngredient('S', CookingItem.SUGAR.getItem());
+            cookieDougRecipe.setIngredient('P', CookingItem.CLEAR_WATER.getItem());
             Bukkit.addRecipe(cookieDougRecipe);
         }
 
@@ -211,8 +220,8 @@ public class CookingItemManager {
             pumpkinPieRecipe.setIngredient('P', Material.PUMPKIN);
             pumpkinPieRecipe.setIngredient('F', CookingItem.FLOUR.getItem());
             pumpkinPieRecipe.setIngredient('E', Material.EGG);
-            pumpkinPieRecipe.setIngredient('S', Material.SUGAR);
-            pumpkinPieRecipe.setIngredient('W', Material.POTION);
+            pumpkinPieRecipe.setIngredient('S', CookingItem.SUGAR.getItem());
+            pumpkinPieRecipe.setIngredient('W', CookingItem.CLEAR_WATER.getItem());
             Bukkit.addRecipe(pumpkinPieRecipe);
         }
 
@@ -239,7 +248,7 @@ public class CookingItemManager {
             honeyMelonJuiceRecipe.shape("MMM", "HWH", "AAA");
             honeyMelonJuiceRecipe.setIngredient('M', Material.MELON_SLICE);
             honeyMelonJuiceRecipe.setIngredient('H', Material.HONEYCOMB);
-            honeyMelonJuiceRecipe.setIngredient('W', Material.POTION);
+            honeyMelonJuiceRecipe.setIngredient('W', CookingItem.CLEAR_WATER.getItem());
             honeyMelonJuiceRecipe.setIngredient('A', Material.AIR);
             customCookingRecipes.add(honeyMelonJuiceRecipe);
         }
@@ -249,7 +258,7 @@ public class CookingItemManager {
             sweetFishRecipe.shape("AAA", "SSS", "XSY");
             sweetFishRecipe.setIngredient('Y', Material.SALMON);
             sweetFishRecipe.setIngredient('X', Material.COD);
-            sweetFishRecipe.setIngredient('S', Material.SUGAR);
+            sweetFishRecipe.setIngredient('S', CookingItem.SUGAR.getItem());
             sweetFishRecipe.setIngredient('A', Material.AIR);
             customCookingRecipes.add(sweetFishRecipe);
         }
@@ -271,7 +280,8 @@ public class CookingItemManager {
             recipe.setIngredient('P', Material.POTATO);
             recipe.setIngredient('X', Material.BROWN_MUSHROOM);
             recipe.setIngredient('Y', Material.RED_MUSHROOM);
-            recipe.setIngredient('W', Material.POTION);
+            recipe.setIngredient('W', CookingItem.CLEAR_WATER.getItem()
+            );
             customCookingRecipes.add(recipe);
         }
 
@@ -280,8 +290,8 @@ public class CookingItemManager {
             recipe.shape("BGB", "BSB", "SWS");
             recipe.setIngredient('B', Material.SWEET_BERRIES);
             recipe.setIngredient('G', Material.GLOW_BERRIES);
-            recipe.setIngredient('S', Material.SUGAR);
-            recipe.setIngredient('W', Material.POTION);
+            recipe.setIngredient('S', CookingItem.SUGAR.getItem());
+            recipe.setIngredient('W', CookingItem.CLEAR_WATER.getItem());
             customCookingRecipes.add(recipe);
         }
 
@@ -292,7 +302,7 @@ public class CookingItemManager {
             recipe.setIngredient('K', Material.KELP);
             recipe.setIngredient('S', Material.SALMON);
             recipe.setIngredient('T', CookingItem.SALT.getItem());
-            recipe.setIngredient('W', Material.POTION);
+            recipe.setIngredient('W', CookingItem.CLEAR_WATER.getItem());
             customCookingRecipes.add(recipe);
         }
 
@@ -301,7 +311,7 @@ public class CookingItemManager {
             recipe.shape("BBB", "BBB", "SWS");
             recipe.setIngredient('B', Material.BEETROOT);
             recipe.setIngredient('S', CookingItem.SALT.getItem());
-            recipe.setIngredient('W', Material.POTION);
+            recipe.setIngredient('W', CookingItem.CLEAR_WATER.getItem());
             customCookingRecipes.add(recipe);
         }
 
@@ -311,7 +321,7 @@ public class CookingItemManager {
             recipe.setIngredient('A', Material.AIR);
             recipe.setIngredient('S', CookingItem.SALT.getItem());
             recipe.setIngredient('W', Material.SEAGRASS);
-            recipe.setIngredient('P', Material.POTION);
+            recipe.setIngredient('P', CookingItem.CLEAR_WATER.getItem());
             recipe.setIngredient('K', Material.KELP);
             customCookingRecipes.add(recipe);
         }
@@ -333,7 +343,7 @@ public class CookingItemManager {
             recipe.setIngredient('D', Material.GREEN_DYE);
             recipe.setIngredient('S', Material.SUGAR_CANE);
             recipe.setIngredient('K', Material.DRIED_KELP);
-            recipe.setIngredient('W', Material.POTION);
+            recipe.setIngredient('W', CookingItem.CLEAR_WATER.getItem());
             customCookingRecipes.add(recipe);
         }
 
@@ -411,6 +421,13 @@ public class CookingItemManager {
             recipe.setIngredient('B', Material.BROWN_MUSHROOM);
             recipe.setIngredient('S', Material.BOWL);
             customCookingRecipes.add(recipe);
+        }
+
+        {
+            ShapelessRecipe recipe = new ShapelessRecipe(new NamespacedKey(Cooking.getInstance(), "CLEAR_WATER"), CookingItem.CLEAR_WATER.getItem());
+            recipe.addIngredient(Material.POTION);
+            recipe.addIngredient(Material.REDSTONE);
+            Bukkit.addRecipe(recipe);
         }
 
     }

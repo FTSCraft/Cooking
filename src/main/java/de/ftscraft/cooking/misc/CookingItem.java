@@ -11,6 +11,7 @@ public enum CookingItem {
 
     //Craftable
     SUGAR(CookingDeviceType.COOKING_POT, 3),
+    CLEAR_WATER(CookingDeviceType.NONE, -1),
 
     //Default food
     COOKED_COD(CookingDeviceType.OVEN, 5),
