@@ -1,5 +1,6 @@
 package de.ftscraft.cooking.main;
 
+import de.ftscraft.cooking.debug.CookingDebugCommand;
 import de.ftscraft.cooking.gui.CookingDevice;
 import de.ftscraft.cooking.listeners.BlockListener;
 import de.ftscraft.cooking.listeners.CraftingListener;
@@ -14,6 +15,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.HashMap;
 
 public final class Cooking extends JavaPlugin {
+
+    public static final boolean DEBUG = false;
 
     private static Cooking instance;
 
@@ -30,6 +33,10 @@ public final class Cooking extends JavaPlugin {
 
         new CraftingListener(this);
         new BlockListener(this);
+
+        if (DEBUG) {
+            getCommand("cooking").setExecutor(new CookingDebugCommand());
+        }
 
         hookIntoCoreProtect();
     }
