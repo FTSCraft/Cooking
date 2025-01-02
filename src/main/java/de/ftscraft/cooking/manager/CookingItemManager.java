@@ -141,6 +141,13 @@ public class CookingItemManager {
                         .build()
         );
 
+        CookingItem.PUMPKIN_SOUP.setItem(
+                new ItemBuilder(Material.HONEY_BOTTLE)
+                        .name("§r§6Kürbissuppe")
+                        .sign(SIGN_PREFIX + CookingItem.PUMPKIN_SOUP)
+                        .build()
+        );
+
         CookingItem.CLEAR_WATER.setItem(
                 new ItemBuilder(Material.HONEY_BOTTLE)
                         .name("§bGereinigtes Wasser")
@@ -344,6 +351,16 @@ public class CookingItemManager {
             recipe.setIngredient('S', Material.SUGAR_CANE);
             recipe.setIngredient('K', Material.DRIED_KELP);
             recipe.setIngredient('W', CookingItem.CLEAR_WATER.getItem());
+            customCookingRecipes.add(recipe);
+        }
+
+        {   // Pumpkin Soup
+            CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.PUMPKIN_SOUP);
+            recipe.shape(" W ", " S ", " P ");
+            recipe.setIngredient('W', CookingItem.CACTUS_JUICE.getItem());
+            recipe.setIngredient('S', CookingItem.SALT.getItem());
+            recipe.setIngredient('P', Material.PUMPKIN);
+            recipe.setIngredient(' ', Material.AIR);
             customCookingRecipes.add(recipe);
         }
 
