@@ -255,10 +255,10 @@ public class CookingItemManager {
 
         {
             CustomCookingRecipe sweetFishRecipe = new CustomCookingRecipe(CookingItem.SWEET_FISH);
-            sweetFishRecipe.shape("AAA", "SSS", "XSY");
-            sweetFishRecipe.setIngredient('Y', Material.SALMON);
-            sweetFishRecipe.setIngredient('X', Material.COD);
-            sweetFishRecipe.setIngredient('S', CookingItem.SUGAR.getItem());
+            sweetFishRecipe.shape("AAA", "LKL", "AZA");
+            sweetFishRecipe.setIngredient('L', Material.SALMON);
+            sweetFishRecipe.setIngredient('K', Material.COD);
+            sweetFishRecipe.setIngredient('Z', CookingItem.SUGAR.getItem());
             sweetFishRecipe.setIngredient('A', Material.AIR);
             customCookingRecipes.add(sweetFishRecipe);
         }
