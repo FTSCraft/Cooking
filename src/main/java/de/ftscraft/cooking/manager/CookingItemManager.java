@@ -108,14 +108,14 @@ public class CookingItemManager {
         );
 
         CookingItem.FISH_SOUP.setItem(
-                new ItemBuilder(Material.MUSHROOM_STEW)
+                new ItemBuilder(Material.HONEY_BOTTLE)
                         .name("§r§6Fischsuppe")
                         .sign(SIGN_PREFIX + CookingItem.FISH_SOUP)
                         .build()
         );
 
         CookingItem.MISO_SOUP.setItem(
-                new ItemBuilder(Material.MUSHROOM_STEW)
+                new ItemBuilder(Material.HONEY_BOTTLE)
                         .name("§r§6Miso Suppe")
                         .sign(SIGN_PREFIX + CookingItem.MISO_SOUP)
                         .build()
