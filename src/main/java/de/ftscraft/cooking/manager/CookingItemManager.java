@@ -357,7 +357,7 @@ public class CookingItemManager {
         {   // Pumpkin Soup
             CustomCookingRecipe recipe = new CustomCookingRecipe(CookingItem.PUMPKIN_SOUP);
             recipe.shape(" W ", " S ", " P ");
-            recipe.setIngredient('W', CookingItem.CACTUS_JUICE.getItem());
+            recipe.setIngredient('W', CookingItem.CLEAR_WATER.getItem());
             recipe.setIngredient('S', CookingItem.SALT.getItem());
             recipe.setIngredient('P', Material.PUMPKIN);
             recipe.setIngredient(' ', Material.AIR);
