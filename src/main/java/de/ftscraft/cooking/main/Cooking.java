@@ -16,8 +16,6 @@ import java.util.HashMap;
 
 public final class Cooking extends JavaPlugin {
 
-    public static final boolean DEBUG = false;
-
     private static Cooking instance;
 
     private final HashMap<Location, CookingDevice> cookingDevices = new HashMap<>();
@@ -34,9 +32,7 @@ public final class Cooking extends JavaPlugin {
         new CraftingListener(this);
         new BlockListener(this);
 
-        if (DEBUG) {
-            getCommand("cooking").setExecutor(new CookingDebugCommand());
-        }
+        getCommand("cooking").setExecutor(new CookingDebugCommand());
 
         hookIntoCoreProtect();
     }
