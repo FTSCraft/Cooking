@@ -39,7 +39,7 @@ public enum CookingItem {
     MISO_SOUP(CookingDeviceType.COOKING_POT, 30),
     SUSHI(CookingDeviceType.NONE, -1),
     CACTUS_JUICE(CookingDeviceType.COOKING_POT, 5),
-    PUMPKIN_SOUP(CookingDeviceType.COOKING_POT, 30),
+    PUMPKIN_SOUP(CookingDeviceType.NONE, -1),
     HONEY_MELON_JUICE(CookingDeviceType.COOKING_POT, 5);
 
     private ItemStack item;

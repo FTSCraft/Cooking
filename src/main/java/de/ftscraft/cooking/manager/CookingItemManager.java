@@ -232,6 +232,16 @@ public class CookingItemManager {
             Bukkit.addRecipe(pumpkinPieRecipe);
         }
 
+        {   // Pumpkin Soup
+            ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(),
+                    "COOKING_PUMPKIN_SOUP"), CookingItem.PUMPKIN_SOUP.getItem());
+            recipe.shape(" W ", " S ", " P ");
+            recipe.setIngredient('W', CookingItem.CLEAR_WATER.getItem());
+            recipe.setIngredient('S', CookingItem.SALT.getItem());
+            recipe.setIngredient('P', Material.PUMPKIN);
+            Bukkit.addRecipe(recipe);
+        }
+
         /* ----------------------------------------------- */
 
         {
