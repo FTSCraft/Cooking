@@ -204,7 +204,8 @@ public class CookingItemManager {
         /* ----------------------------------------------- */
 
         {
-            ShapedRecipe flourRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(), "COOKING_FLOUR"), CookingItem.FLOUR.getItem());
+            ShapedRecipe flourRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(),
+                    "COOKING_FLOUR"), CookingItem.FLOUR.getItem());
             flourRecipe.shape("SWS", "WWW", "SWS");
             flourRecipe.setIngredient('S', Material.WHEAT_SEEDS);
             flourRecipe.setIngredient('W', Material.WHEAT);
@@ -212,7 +213,8 @@ public class CookingItemManager {
         }
 
         {
-            ShapedRecipe cookieDougRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(), "COOKING_COOKIE_DOUG"), CookingItem.COOKIE_DOUG.getItem());
+            ShapedRecipe cookieDougRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(),
+                    "COOKING_COOKIE_DOUG"), CookingItem.COOKIE_DOUG.getItem());
             cookieDougRecipe.shape("CCC", "AFA", "SPS");
             cookieDougRecipe.setIngredient('C', Material.COCOA_BEANS);
             cookieDougRecipe.setIngredient('F', CookingItem.FLOUR.getItem());
@@ -222,7 +224,8 @@ public class CookingItemManager {
         }
 
         {
-            ShapedRecipe pumpkinPieRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(), "COOKING_PUMPKIN_PIE_DOUG"), CookingItem.PUMPKIN_PIE_DOUG.getItem());
+            ShapedRecipe pumpkinPieRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(),
+                    "COOKING_PUMPKIN_PIE_DOUG"), CookingItem.PUMPKIN_PIE_DOUG.getItem());
             pumpkinPieRecipe.shape("PFP", "EWE", "SWS");
             pumpkinPieRecipe.setIngredient('P', Material.PUMPKIN);
             pumpkinPieRecipe.setIngredient('F', CookingItem.FLOUR.getItem());
