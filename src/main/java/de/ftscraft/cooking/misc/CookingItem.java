@@ -22,7 +22,7 @@ public enum CookingItem {
     COOKED_MUTTON(CookingDeviceType.OVEN, 5),
     COOKED_RABBIT(CookingDeviceType.OVEN, 5),
     BAKED_POTATO(CookingDeviceType.OVEN, 5),
-    MUSHROOM_STEW(CookingDeviceType.OVEN, 5),
+    MUSHROOM_STEW(CookingDeviceType.COOKING_POT, 5),
     RABBIT_STEW(CookingDeviceType.COOKING_POT, 30),
     BEETROOT_SOUP(CookingDeviceType.COOKING_POT, 30),
     PUMPKIN_PIE(CookingDeviceType.OVEN, 10),
