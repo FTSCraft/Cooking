@@ -215,7 +215,7 @@ public class CookingItemManager {
         {
             ShapedRecipe cookieDougRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(),
                     "COOKING_COOKIE_DOUG"), CookingItem.COOKIE_DOUG.getItem());
-            cookieDougRecipe.shape("CCC", "AFA", "SPS");
+            cookieDougRecipe.shape("CCC", " F ", "SPS");
             cookieDougRecipe.setIngredient('C', Material.COCOA_BEANS);
             cookieDougRecipe.setIngredient('F', CookingItem.FLOUR.getItem());
             cookieDougRecipe.setIngredient('S', CookingItem.SUGAR.getItem());
