@@ -22,23 +22,24 @@ public enum CookingItem {
     COOKED_MUTTON(CookingDeviceType.OVEN, 5),
     COOKED_RABBIT(CookingDeviceType.OVEN, 5),
     BAKED_POTATO(CookingDeviceType.OVEN, 5),
-    MUSHROOM_STEW(CookingDeviceType.OVEN, 5),
+    MUSHROOM_STEW(CookingDeviceType.COOKING_POT, 5),
+    RABBIT_STEW(CookingDeviceType.COOKING_POT, 30),
+    BEETROOT_SOUP(CookingDeviceType.COOKING_POT, 30),
+    PUMPKIN_PIE(CookingDeviceType.OVEN, 10),
+    COOKIE(CookingDeviceType.OVEN, 10),
 
     //Plugin food/items
     FLOUR(CookingDeviceType.NONE, -1),
     BREAD(CookingDeviceType.OVEN, 5),
     COOKIE_DOUG(CookingDeviceType.NONE, -1),
-    COOKIE(CookingDeviceType.OVEN, 10),
     PUMPKIN_PIE_DOUG(CookingDeviceType.NONE, -1),
-    PUMPKIN_PIE(CookingDeviceType.OVEN, 10),
     SWEET_FISH(CookingDeviceType.OVEN, 20),
-    RABBIT_STEW(CookingDeviceType.COOKING_POT, 30),
     SWEET_JAM(CookingDeviceType.COOKING_POT, 45),
     FISH_SOUP(CookingDeviceType.COOKING_POT, 30),
-    BEETROOT_SOUP(CookingDeviceType.COOKING_POT, 30),
     MISO_SOUP(CookingDeviceType.COOKING_POT, 30),
     SUSHI(CookingDeviceType.NONE, -1),
     CACTUS_JUICE(CookingDeviceType.COOKING_POT, 5),
+    PUMPKIN_SOUP(CookingDeviceType.NONE, -1),
     HONEY_MELON_JUICE(CookingDeviceType.COOKING_POT, 5);
 
     private ItemStack item;

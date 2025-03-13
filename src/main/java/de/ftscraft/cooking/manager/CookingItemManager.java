@@ -108,14 +108,14 @@ public class CookingItemManager {
         );
 
         CookingItem.FISH_SOUP.setItem(
-                new ItemBuilder(Material.MUSHROOM_STEW)
+                new ItemBuilder(Material.HONEY_BOTTLE)
                         .name("§r§6Fischsuppe")
                         .sign(SIGN_PREFIX + CookingItem.FISH_SOUP)
                         .build()
         );
 
         CookingItem.MISO_SOUP.setItem(
-                new ItemBuilder(Material.MUSHROOM_STEW)
+                new ItemBuilder(Material.HONEY_BOTTLE)
                         .name("§r§6Miso Suppe")
                         .sign(SIGN_PREFIX + CookingItem.MISO_SOUP)
                         .build()
@@ -138,6 +138,13 @@ public class CookingItemManager {
                 new ItemBuilder(Material.HONEY_BOTTLE)
                         .name("§r§6Kaktussaft")
                         .sign(SIGN_PREFIX + CookingItem.CACTUS_JUICE)
+                        .build()
+        );
+
+        CookingItem.PUMPKIN_SOUP.setItem(
+                new ItemBuilder(Material.HONEY_BOTTLE)
+                        .name("§r§6Kürbissuppe")
+                        .sign(SIGN_PREFIX + CookingItem.PUMPKIN_SOUP)
                         .build()
         );
 
@@ -197,7 +204,8 @@ public class CookingItemManager {
         /* ----------------------------------------------- */
 
         {
-            ShapedRecipe flourRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(), "COOKING_FLOUR"), CookingItem.FLOUR.getItem());
+            ShapedRecipe flourRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(),
+                    "COOKING_FLOUR"), CookingItem.FLOUR.getItem());
             flourRecipe.shape("SWS", "WWW", "SWS");
             flourRecipe.setIngredient('S', Material.WHEAT_SEEDS);
             flourRecipe.setIngredient('W', Material.WHEAT);
@@ -205,8 +213,9 @@ public class CookingItemManager {
         }
 
         {
-            ShapedRecipe cookieDougRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(), "COOKING_COOKIE_DOUG"), CookingItem.COOKIE_DOUG.getItem());
-            cookieDougRecipe.shape("CCC", "AFA", "SPS");
+            ShapedRecipe cookieDougRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(),
+                    "COOKING_COOKIE_DOUG"), CookingItem.COOKIE_DOUG.getItem());
+            cookieDougRecipe.shape("CCC", " F ", "SPS");
             cookieDougRecipe.setIngredient('C', Material.COCOA_BEANS);
             cookieDougRecipe.setIngredient('F', CookingItem.FLOUR.getItem());
             cookieDougRecipe.setIngredient('S', CookingItem.SUGAR.getItem());
@@ -215,7 +224,8 @@ public class CookingItemManager {
         }
 
         {
-            ShapedRecipe pumpkinPieRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(), "COOKING_PUMPKIN_PIE_DOUG"), CookingItem.PUMPKIN_PIE_DOUG.getItem());
+            ShapedRecipe pumpkinPieRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(),
+                    "COOKING_PUMPKIN_PIE_DOUG"), CookingItem.PUMPKIN_PIE_DOUG.getItem());
             pumpkinPieRecipe.shape("PFP", "EWE", "SWS");
             pumpkinPieRecipe.setIngredient('P', Material.PUMPKIN);
             pumpkinPieRecipe.setIngredient('F', CookingItem.FLOUR.getItem());
@@ -223,6 +233,16 @@ public class CookingItemManager {
             pumpkinPieRecipe.setIngredient('S', CookingItem.SUGAR.getItem());
             pumpkinPieRecipe.setIngredient('W', CookingItem.CLEAR_WATER.getItem());
             Bukkit.addRecipe(pumpkinPieRecipe);
+        }
+
+        {   // Pumpkin Soup
+            ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(),
+                    "COOKING_PUMPKIN_SOUP"), CookingItem.PUMPKIN_SOUP.getItem());
+            recipe.shape(" W ", " S ", " P ");
+            recipe.setIngredient('W', CookingItem.CLEAR_WATER.getItem());
+            recipe.setIngredient('S', CookingItem.SALT.getItem());
+            recipe.setIngredient('P', Material.PUMPKIN);
+            Bukkit.addRecipe(recipe);
         }
 
         /* ----------------------------------------------- */
@@ -255,10 +275,10 @@ public class CookingItemManager {
 
         {
             CustomCookingRecipe sweetFishRecipe = new CustomCookingRecipe(CookingItem.SWEET_FISH);
-            sweetFishRecipe.shape("AAA", "SSS", "XSY");
-            sweetFishRecipe.setIngredient('Y', Material.SALMON);
-            sweetFishRecipe.setIngredient('X', Material.COD);
-            sweetFishRecipe.setIngredient('S', CookingItem.SUGAR.getItem());
+            sweetFishRecipe.shape("AAA", "LKL", "AZA");
+            sweetFishRecipe.setIngredient('L', Material.SALMON);
+            sweetFishRecipe.setIngredient('K', Material.COD);
+            sweetFishRecipe.setIngredient('Z', CookingItem.SUGAR.getItem());
             sweetFishRecipe.setIngredient('A', Material.AIR);
             customCookingRecipes.add(sweetFishRecipe);
         }
