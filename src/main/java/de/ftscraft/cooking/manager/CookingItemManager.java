@@ -152,7 +152,7 @@ public class CookingItemManager {
                 new ItemBuilder(Material.HONEY_BOTTLE)
                         .name("§bGereinigtes Wasser")
                         .lore("§7Gereinigt")
-                        .sign("CLEAR_WATER")
+                        .sign(SIGN_PREFIX + "CLEAR_WATER")
                         .build()
         );
 
