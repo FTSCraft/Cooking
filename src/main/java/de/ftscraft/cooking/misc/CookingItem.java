@@ -29,6 +29,8 @@ public enum CookingItem {
     COOKIE(CookingDeviceType.OVEN, 10),
 
     //Plugin food/items
+    CANDIED_PUMPKIN(CookingDeviceType.NONE, -1),
+    BLACK_CHOCOLATE(CookingDeviceType.NONE, -1),
     FLOUR(CookingDeviceType.NONE, -1),
     BREAD(CookingDeviceType.OVEN, 5),
     COOKIE_DOUG(CookingDeviceType.NONE, -1),
