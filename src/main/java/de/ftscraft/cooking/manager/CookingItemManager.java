@@ -148,6 +148,20 @@ public class CookingItemManager {
                         .build()
         );
 
+        CookingItem.BLACK_CHOCOLATE.setItem(
+                new ItemBuilder(Material.COOKIE)
+                        .name("§r§6Schwarze Schokolade")
+                        .sign(SIGN_PREFIX + CookingItem.BLACK_CHOCOLATE)
+                        .build()
+        );
+
+        CookingItem.CANDIED_PUMPKIN.setItem(
+                new ItemBuilder(Material.DRIED_KELP)
+                        .name("§r§6Kandierter Kürbis")
+                        .sign(SIGN_PREFIX + CookingItem.CANDIED_PUMPKIN)
+                        .build()
+        );
+
         CookingItem.CLEAR_WATER.setItem(
                 new ItemBuilder(Material.HONEY_BOTTLE)
                         .name("§bGereinigtes Wasser")
@@ -210,6 +224,23 @@ public class CookingItemManager {
             flourRecipe.setIngredient('S', Material.WHEAT_SEEDS);
             flourRecipe.setIngredient('W', Material.WHEAT);
             Bukkit.addRecipe(flourRecipe);
+        }
+
+        {
+            ShapedRecipe candiedPumpkinRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(),
+                    "COOKING_CANDIED_PUMPKIN"), CookingItem.CANDIED_PUMPKIN.getItem());
+            candiedPumpkinRecipe.shape("***", "ABA", "*A*");
+            candiedPumpkinRecipe.setIngredient('A', Material.SUGAR_CANE);
+            candiedPumpkinRecipe.setIngredient('B', Material.PUMPKIN);
+            Bukkit.addRecipe(candiedPumpkinRecipe);
+        }
+
+        {
+            ShapedRecipe blackChocolateRecipe = new ShapedRecipe(new NamespacedKey(Cooking.getInstance(),
+                    "COOKING_BACK_CHOCOLATE"), CookingItem.BLACK_CHOCOLATE.getItem());
+            blackChocolateRecipe.shape("***", "AAA", "***");
+            blackChocolateRecipe.setIngredient('A', Material.COCOA_BEANS);
+            Bukkit.addRecipe(blackChocolateRecipe);
         }
 
         {
