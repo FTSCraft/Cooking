@@ -44,6 +44,52 @@ public class CraftingListener implements Listener {
     }
 
     @EventHandler
+    public void onCraftItem(CraftItemEvent event) {
+        if (event.getInventory().getType() != InventoryType.WORKBENCH)
+            return;
+            
+        ItemStack result = event.getRecipe().getResult();
+        String sign = ItemReader.getSign(result);
+        if (sign == null || !sign.startsWith("COOKING"))
+            return;
+            
+        String itemName = sign.replaceFirst("COOKING_", "");
+        switch (itemName) {
+            case "PUMPKIN_SOUP":
+            case "HONEY_MELON_JUICE":
+            case "SWEET_JAM":
+            case "FISH_SOUP":
+            case "BEETROOT_SOUP":
+            case "MISO_SOUP":
+            case "CACTUS_JUICE":
+            case "RABBIT_STEW":
+                event.setCancelled(true);
+                ItemStack[] matrix = event.getInventory().getMatrix();
+                boolean hasBottle = false;
+                for (int i = 0; i < matrix.length; i++) {
+                    ItemStack item = matrix[i];
+                    if (item != null) {
+                        String itemSign = ItemReader.getSign(item);
+                        if (itemSign != null && itemSign.equals("COOKING_CLEAR_WATER")) {
+                            hasBottle = true;
+                        }
+                        if (item.getAmount() > 1) {
+                            item.setAmount(item.getAmount() - 1);
+                        } else {
+                            matrix[i] = null;
+                        }
+                    }
+                }
+                
+                if (hasBottle) {
+                    event.getInventory().setMatrix(matrix);
+                    event.setCursor(result);
+                }
+                break;
+        }
+    }
+
+    @EventHandler
     public void onInventoryDrag(InventoryDragEvent event) {
         // Check if inventory is the inv of a cooking device
         if (event.getInventory().getHolder() == null) {
