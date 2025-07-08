@@ -8,6 +8,7 @@ import de.ftscraft.cooking.misc.Misc;
 import de.ftscraft.ftsutils.items.ItemReader;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.*;
@@ -15,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
 
 public class CraftingListener implements Listener {
 
@@ -47,45 +49,38 @@ public class CraftingListener implements Listener {
     public void onCraftItem(CraftItemEvent event) {
         if (event.getInventory().getType() != InventoryType.WORKBENCH)
             return;
-            
+
         ItemStack result = event.getRecipe().getResult();
-        String sign = ItemReader.getSign(result);
-        if (sign == null || !sign.startsWith("COOKING"))
-            return;
-            
-        String itemName = sign.replaceFirst("COOKING_", "");
-        switch (itemName) {
-            case "PUMPKIN_SOUP":
-            case "HONEY_MELON_JUICE":
-            case "SWEET_JAM":
-            case "FISH_SOUP":
-            case "BEETROOT_SOUP":
-            case "MISO_SOUP":
-            case "CACTUS_JUICE":
-            case "RABBIT_STEW":
-                event.setCancelled(true);
-                ItemStack[] matrix = event.getInventory().getMatrix();
-                boolean hasBottle = false;
-                for (int i = 0; i < matrix.length; i++) {
-                    ItemStack item = matrix[i];
-                    if (item != null) {
-                        String itemSign = ItemReader.getSign(item);
-                        if (itemSign != null && itemSign.equals("COOKING_CLEAR_WATER")) {
-                            hasBottle = true;
-                        }
-                        if (item.getAmount() > 1) {
-                            item.setAmount(item.getAmount() - 1);
-                        } else {
-                            matrix[i] = null;
-                        }
+        Material type = result.getType();
+        if (type == Material.HONEY_BOTTLE) {
+            event.setCancelled(true);
+            ItemStack[] matrix = event.getInventory().getMatrix();
+            boolean hasBottle = false;
+            for (int i = 0; i < matrix.length; i++) {
+                ItemStack item = matrix[i];
+                if (item != null && item.getType() == Material.HONEY_BOTTLE) {
+                    hasBottle = true;
+                }
+                if (item != null) {
+                    if (item.getAmount() > 1) {
+                        item.setAmount(item.getAmount() - 1);
+                    } else {
+                        matrix[i] = null;
                     }
                 }
-                
-                if (hasBottle) {
-                    event.getInventory().setMatrix(matrix);
-                    event.setCursor(result);
+            }
+
+            if (hasBottle) {
+                event.getInventory().setMatrix(matrix);
+                Player player = (Player) event.getWhoClicked();
+                HashMap<Integer, ItemStack> itemsNotAdded = player.getInventory().addItem(result);
+                // If there's no space for items, drop them at the players location
+                if (!itemsNotAdded.isEmpty()) {
+                    for (ItemStack leftover : itemsNotAdded.values()) {
+                        player.getWorld().dropItemNaturally(player.getLocation(), leftover);
+                    }
                 }
-                break;
+            }
         }
     }
 
