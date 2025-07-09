@@ -54,33 +54,22 @@ public class CraftingListener implements Listener {
         Material type = result.getType();
         if (type == Material.HONEY_BOTTLE) {
             event.setCancelled(true);
+            ItemStack cursor = event.getView().getCursor();
+            // Wenn die Hand weder leer ist noch genug Platz hat für für ein weiteres Craftingergebnis, skip
+            if (!cursor.isEmpty() && (!cursor.isSimilar(result) || cursor.getAmount() + result.getAmount() > result.getMaxStackSize())) {
+                return;
+            }
             ItemStack[] matrix = event.getInventory().getMatrix();
-            boolean hasBottle = false;
-            for (int i = 0; i < matrix.length; i++) {
-                ItemStack item = matrix[i];
-                if (item != null && item.getType() == Material.HONEY_BOTTLE) {
-                    hasBottle = true;
-                }
+            for (ItemStack item : matrix) {
                 if (item != null) {
-                    if (item.getAmount() > 1) {
-                        item.setAmount(item.getAmount() - 1);
-                    } else {
-                        matrix[i] = null;
-                    }
+                    item.setAmount(item.getAmount() - 1);
                 }
             }
 
-            if (hasBottle) {
-                event.getInventory().setMatrix(matrix);
-                Player player = (Player) event.getWhoClicked();
-                HashMap<Integer, ItemStack> itemsNotAdded = player.getInventory().addItem(result);
-                // If there's no space for items, drop them at the players location
-                if (!itemsNotAdded.isEmpty()) {
-                    for (ItemStack leftover : itemsNotAdded.values()) {
-                        player.getWorld().dropItemNaturally(player.getLocation(), leftover);
-                    }
-                }
-            }
+            event.getInventory().setMatrix(matrix);
+            ItemStack resultClone = result.clone();
+            resultClone.setAmount(result.getAmount() + event.getView().getCursor().getAmount());
+            event.getView().setCursor(resultClone);
         }
     }
 
