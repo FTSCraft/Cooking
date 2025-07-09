@@ -8,7 +8,6 @@ import de.ftscraft.cooking.misc.Misc;
 import de.ftscraft.ftsutils.items.ItemReader;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.*;
@@ -16,7 +15,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
 
 public class CraftingListener implements Listener {
 
@@ -39,7 +37,7 @@ public class CraftingListener implements Listener {
         if (sign == null)
             return;
         if (sign.startsWith("COOKING")) {
-            if (!event.getViewers().get(0).hasPermission("cooking.skill")) {
+            if (!event.getViewers().getFirst().hasPermission("cooking.skill")) {
                 event.getInventory().setResult(null);
             }
         }
@@ -52,6 +50,9 @@ public class CraftingListener implements Listener {
 
         ItemStack result = event.getRecipe().getResult();
         Material type = result.getType();
+        String sign = ItemReader.getSign(result);
+        if (sign == null || !sign.startsWith("COOKING"))
+            return;
         if (type == Material.HONEY_BOTTLE) {
             event.setCancelled(true);
             ItemStack cursor = event.getView().getCursor();
