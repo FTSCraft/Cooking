@@ -37,9 +37,40 @@ public class CraftingListener implements Listener {
         if (sign == null)
             return;
         if (sign.startsWith("COOKING")) {
-            if (!event.getViewers().get(0).hasPermission("cooking.skill")) {
+            if (!event.getViewers().getFirst().hasPermission("cooking.skill")) {
                 event.getInventory().setResult(null);
             }
+        }
+    }
+
+    @EventHandler
+    public void onCraftItem(CraftItemEvent event) {
+        if (event.getInventory().getType() != InventoryType.WORKBENCH)
+            return;
+
+        ItemStack result = event.getRecipe().getResult();
+        Material type = result.getType();
+        String sign = ItemReader.getSign(result);
+        if (sign == null || !sign.startsWith("COOKING"))
+            return;
+        if (type == Material.HONEY_BOTTLE) {
+            event.setCancelled(true);
+            ItemStack cursor = event.getView().getCursor();
+            // Wenn die Hand weder leer ist noch genug Platz hat für für ein weiteres Craftingergebnis, skip
+            if (!cursor.isEmpty() && (!cursor.isSimilar(result) || cursor.getAmount() + result.getAmount() > result.getMaxStackSize())) {
+                return;
+            }
+            ItemStack[] matrix = event.getInventory().getMatrix();
+            for (ItemStack item : matrix) {
+                if (item != null) {
+                    item.setAmount(item.getAmount() - 1);
+                }
+            }
+
+            event.getInventory().setMatrix(matrix);
+            ItemStack resultClone = result.clone();
+            resultClone.setAmount(result.getAmount() + event.getView().getCursor().getAmount());
+            event.getView().setCursor(resultClone);
         }
     }
 
