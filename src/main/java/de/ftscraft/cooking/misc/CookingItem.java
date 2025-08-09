@@ -7,7 +7,7 @@ public enum CookingItem {
     //Non-Craftable
     COOKING_POT(CookingDeviceType.NONE, -1),
     OVEN(CookingDeviceType.NONE, -1),
-    SALT(CookingDeviceType.NONE, -1),
+    SALT(CookingDeviceType.COOKING_POT, 5),
 
     //Craftable
     SUGAR(CookingDeviceType.COOKING_POT, 3),
