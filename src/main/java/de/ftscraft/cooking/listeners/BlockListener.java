@@ -61,17 +61,6 @@ public class BlockListener implements Listener {
     @EventHandler
     public void onBreak(BlockBreakEvent event) {
 
-        if (event.getBlock().getType() == Material.DIORITE) {
-            if (plugin.getCoreProtectAPI().blockLookup(event.getBlock(), Integer.MAX_VALUE).isEmpty()) {
-                if (Math.random() < 0.05) {
-                    event.setCancelled(true);
-                    event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), CookingItem.SALT.getItem());
-                    event.getBlock().setType(Material.AIR);
-                }
-            }
-            return;
-        }
-
         CustomBlockData blockData = new CustomBlockData(event.getBlock(), plugin);
         if (blockData.has(Misc.DEVICE_TYPE_KEY)) {
             event.setCancelled(true);

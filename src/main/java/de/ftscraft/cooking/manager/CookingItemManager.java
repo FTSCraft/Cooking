@@ -279,6 +279,14 @@ public class CookingItemManager {
         /* ----------------------------------------------- */
 
         {
+            CustomCookingRecipe saltRecipe = new CustomCookingRecipe(CookingItem.SALT);
+            saltRecipe.shape("AAA", "ADA", "AAA");
+            saltRecipe.setIngredient('A', Material.AIR);
+            saltRecipe.setIngredient('D', Material.DIORITE);
+            customCookingRecipes.add(saltRecipe);
+        }
+
+        {
             CustomCookingRecipe breadRecipe = new CustomCookingRecipe(CookingItem.BREAD);
             breadRecipe.shape("AAA", "FFF", "AAA");
             breadRecipe.setIngredient('A', Material.AIR);
