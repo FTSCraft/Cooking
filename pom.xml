@@ -74,10 +74,5 @@
             <artifactId>custom-block-data</artifactId>
             <version>2.2.2</version>
         </dependency>
-        <dependency>
-            <groupId>net.coreprotect</groupId>
-            <artifactId>coreprotect</artifactId>
-            <version>22.3</version>
-        </dependency>
     </dependencies>
 </project>
